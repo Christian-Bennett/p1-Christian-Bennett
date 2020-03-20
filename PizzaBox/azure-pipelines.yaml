@@ -1,0 +1,42 @@
+name: $(date:yyyyMMdd)$(rev:.rr) #20200319.00
+
+pr:
+  - master
+
+stages:
+  - stage: pack
+    jobs:
+      - job: 
+        pool:
+          vmImage: ubuntu-18.04
+        steps:
+          - script: dotnet build
+          workingDirectory: $(System.DefaultWorkingDirectory)/PizzaBox
+
+  - stage: test
+    jobs:
+      - job:
+        pool:
+          vmImage: ubuntu-18.04
+        steps:
+          - script: dotnet test --collect:"XPlat Code Coverage"
+          workingDirectory: ./PizzaBox
+
+  - stage: pack
+    jobs:
+      - job:
+        pool:
+          vmImage: ubuntu18.04
+        steps:
+          - script: |
+          docker login
+          docker image build --file dockerfile --tag bennetcd/p1 .
+          docker image push bennetcd/p1
+          docker logout
+        workingDirectory: ./PizzaBox
+        
+
+trigger:
+  - master
+
+variables:

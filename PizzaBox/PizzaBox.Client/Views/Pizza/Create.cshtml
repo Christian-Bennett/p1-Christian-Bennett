@@ -1,0 +1,27 @@
+@model PizzaBox.Client.Models.PizzaViewModel
+
+<form action="/pizza/create" method="POST">
+  @Html.AntiForgeryToken()
+
+  @foreach (var item in @Model.SizeList)
+  {
+    <label id="SizeOption">@String.Concat(item.Name," $",item.Price," ") @Html.RadioButtonFor(pvm => pvm.Size, item.Name)</label>
+  }
+
+  <br>
+  <select asp-for="@Model.Crust">
+    @foreach (var item in @Model.CrustList)
+    {
+      <option value="@item" id="CrustOption">@String.Concat(item.Name," $",item.Price," ")</option>
+    }
+  </select>
+  <br>
+  <br>
+
+  @foreach(var item in @Model.ToppingList)
+  {
+    <label id="ToppingOption">@String.Concat(item.Name," $",item.Price," ")<input type="checkbox" name="@Model.Toppings" value="@item.Name"/></label>
+  }
+
+  <button type="submit">Submit Pizza</button>
+</form>
