@@ -11,6 +11,8 @@
   <input type="text" asp-for="@Model.Password" />
   @Html.ValidationMessageFor(avm => avm.Password)
 
+  @Html.RadioButtonFor(avm => avm.User, true)
+
   <button type="reset">Clear</button>
   <button type="submit">Login</button>
 </form>
