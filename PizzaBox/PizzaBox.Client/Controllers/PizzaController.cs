@@ -22,12 +22,12 @@ namespace PizzaBox.Client.Controllers
     }
 
     [HttpPost]
-    public IActionResult Add(PizzaViewModel pizzaViewModel)
+    public IActionResult Create(PizzaViewModel pizzaViewModel)
     {
 
       if(ModelState.IsValid)
       {
-        return RedirectToAction("Create");
+        return RedirectToAction("User");
       }
       return View();
     }

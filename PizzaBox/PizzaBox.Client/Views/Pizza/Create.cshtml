@@ -20,7 +20,7 @@
 
   @foreach(var item in @Model.ToppingList)
   {
-    <label id="ToppingOption">@String.Concat(item.Name," $",item.Price," ")<input type="checkbox" name="@Model.Toppings" value="@item.Name"/></label>
+    <label id="ToppingOption" asp-for="@Model.Toppings">@String.Concat(item.Name," $",item.Price," ")<input type="checkbox" name="@Model.Toppings"/></label>
   }
 
   <button type="submit">Submit Pizza</button>

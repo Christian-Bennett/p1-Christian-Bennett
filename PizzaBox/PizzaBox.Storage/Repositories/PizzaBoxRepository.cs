@@ -11,11 +11,6 @@ namespace PizzaBox.Storage.Repositories
   {
     private readonly PizzaBoxDbContext _db = new PizzaBoxDbContext();
 
-    // public PizzaBoxRepository(PizzaBoxDbContext dbContext)
-    // {
-    //   _db = dbContext;
-    // }
-
     public virtual IEnumerable<T> Read<T>() where T : class
     {
       return _db.Set<T>();
