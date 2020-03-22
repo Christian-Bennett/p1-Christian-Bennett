@@ -3,10 +3,8 @@ using PizzaBox.Domain.Abstracts;
 
 namespace PizzaBox.Domain.Models
 {
-  public class Pizza
+  public class Pizza : APizzaComponent
   {
-    public long PizzaId { get; set; }
-    public decimal Price { get; set; }
 
     #region NAVIGATIONAL PROPERTIES
 

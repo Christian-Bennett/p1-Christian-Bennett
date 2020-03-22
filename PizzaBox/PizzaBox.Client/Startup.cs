@@ -9,7 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
-using PizzaBox.Storage;
+using PizzaBox.Storage.Databases;
 using PizzaBox.Storage.Repositories;
 
 namespace PizzaBox.Client
@@ -27,16 +27,12 @@ namespace PizzaBox.Client
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            services.AddDbContext<PizzaBoxDbContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("main")));
-            services.AddScoped<PizzaBoxRepository>(); //Lifetime of the application for all requests. Example would be for connecting to repository when getting information. Everyone is connecting to same database
-            // services.AddScoped<IRepository, PizzaBoxRepository>(); //Lifetime of 1 request for all method calls. Example would be for each user accessing order history
-            // services.AddTransient<IRepository, PizzaBoxRepository>(); //Lifetime of 1 method call within 1 request. Example would be for displaying pizza list 
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, PizzaBoxDbContext dbContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            dbContext.Database.Migrate();
 
             if (env.IsDevelopment())
             {

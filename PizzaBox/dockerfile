@@ -14,6 +14,7 @@ COPY --from=build p1/out ./
 CMD ["dotnet", "PizzaBox.Client.dll"]
 #CMD is executed from outside this container (i.e docker container)
 
-#docker container run -it --rm --name p1 -p 80:8000 pizzabox
 #docker image build --file dockerfile --tag pizzabox .
+#docker container run -it --rm --name p1 -p 80:8000 pizzabox
+
 

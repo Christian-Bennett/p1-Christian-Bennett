@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using PizzaBox.Domain.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PizzaBox.Domain.Abstracts
 {

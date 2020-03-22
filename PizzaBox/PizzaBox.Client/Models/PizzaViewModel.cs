@@ -7,11 +7,8 @@ namespace PizzaBox.Client.Models
 {
   public class PizzaViewModel
   {
-    private PizzaBoxRepository _pr;
-    public PizzaViewModel(PizzaBoxRepository repository)
-    {
-      _pr = repository;
-    }
+    private readonly PizzaBoxRepository _pr = new PizzaBoxRepository();
+
     public List<Crust> CrustList { get; set; }
     public List<Size> SizeList { get; set; }
     public List<Topping> ToppingList { get; set; }
@@ -25,8 +22,8 @@ namespace PizzaBox.Client.Models
       SizeList = _pr.Read<Size>().ToList();
       CrustList = _pr.Read<Crust>().ToList();
       ToppingList = _pr.Read<Topping>().ToList();
+      
     }
-    
+  }   
 
-  }
 }

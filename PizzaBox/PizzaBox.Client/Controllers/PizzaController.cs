@@ -1,12 +1,16 @@
 using Microsoft.AspNetCore.Mvc;
 using PizzaBox.Client.Models;
+using PizzaBox.Storage.Databases;
+using PizzaBox.Storage.Repositories;
+using System.Collections.Generic;
 
 namespace PizzaBox.Client.Controllers
 {
   public class PizzaController : Controller
   {
+
     [HttpGet]
-    public IActionResult Read()
+    public IActionResult Get()
     {
       return View();
     }
@@ -18,9 +22,26 @@ namespace PizzaBox.Client.Controllers
     }
 
     [HttpPost]
-    public IActionResult Create(PizzaViewModel pizzaViewModel)
+    public IActionResult Add(PizzaViewModel pizzaViewModel)
     {
+
+      if(ModelState.IsValid)
+      {
+        return RedirectToAction("Create");
+      }
       return View();
+    }
+
+    [HttpPut]
+    public void Put()
+    {
+
+    }
+
+    [HttpDelete]
+    public void Delete()
+    {
+
     }
   }
 }

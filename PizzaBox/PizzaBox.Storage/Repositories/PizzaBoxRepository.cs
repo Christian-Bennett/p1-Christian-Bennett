@@ -1,18 +1,22 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using PizzaBox.Domain.Models;
+using PizzaBox.Storage.Databases;
+
 
 namespace PizzaBox.Storage.Repositories
 {
   public class PizzaBoxRepository
   {
-    private PizzaBoxDbContext _db;
+    private readonly PizzaBoxDbContext _db = new PizzaBoxDbContext();
 
-    public PizzaBoxRepository(PizzaBoxDbContext dbContext)
-    {
-      _db = dbContext;
-    }
-    public IEnumerable<T> Read<T>() where T : class
+    // public PizzaBoxRepository(PizzaBoxDbContext dbContext)
+    // {
+    //   _db = dbContext;
+    // }
+
+    public virtual IEnumerable<T> Read<T>() where T : class
     {
       return _db.Set<T>();
     }

@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
 using PizzaBox.Domain.Models;
 
-namespace PizzaBox.Storage
+namespace PizzaBox.Storage.Databases
 {
   public class PizzaBoxDbContext : DbContext
   {
+
+    //public PizzaBoxDbContext(DbContextOptions<PizzaBoxDbContext> options) : base(options) { }
     //dotnet add PizzaBox.Storage/PizzaBox.Storage.csproj package microsoft.entityframeworkcore.design
     //dotnet add PizzaBox.Storage/PizzaBox.Storage.csproj package microsoft.entityframeworkcore.sqlserver
     public DbSet<Pizza> Pizza { get; set; }
@@ -12,7 +14,10 @@ namespace PizzaBox.Storage
     public DbSet<Crust> Crust { get; set; }
     public DbSet<Topping> Topping { get; set; }
 
-    public PizzaBoxDbContext(DbContextOptions options) : base(options) { }
+    protected override void OnConfiguring(DbContextOptionsBuilder builder)
+    {
+      builder.UseSqlServer("server=localhost;database=pizzaboxdb;user id=sa;password=Password12345;");
+    }
     
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -20,8 +25,8 @@ namespace PizzaBox.Storage
       builder.Entity<Size>().HasKey(s => s.Id);
       builder.Entity<Crust>().HasKey(c => c.Id);
       builder.Entity<Topping>().HasKey(t => t.Id);
-      builder.Entity<Pizza>().HasKey(p => p.PizzaId);
-      builder.Entity<Pizza>().Property(p => p.PizzaId).ValueGeneratedNever();
+      builder.Entity<Pizza>().HasKey(p => p.Id);
+      builder.Entity<Pizza>().Property(p => p.Id).ValueGeneratedNever();
       builder.Entity<PizzaToppings>().HasKey(pt => new { pt.PizzaId, pt.ToppingId });
 
       //Define relationships between tables

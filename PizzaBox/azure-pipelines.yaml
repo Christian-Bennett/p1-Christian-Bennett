@@ -11,7 +11,7 @@ stages:
           vmImage: ubuntu-18.04
         steps:
           - script: dotnet build
-          workingDirectory: $(System.DefaultWorkingDirectory)/PizzaBox
+          workingDirectory: $(working_dir)
 
   - stage: test
     jobs:
@@ -20,7 +20,7 @@ stages:
           vmImage: ubuntu-18.04
         steps:
           - script: dotnet test --collect:"XPlat Code Coverage"
-          workingDirectory: ./PizzaBox
+          workingDirectory: $(working_dir)
 
   - stage: pack
     jobs:
@@ -40,3 +40,5 @@ trigger:
   - master
 
 variables:
+  - name: working_dir
+    value: $(System.DefaultWorkingDirectory)/PizzaBox
