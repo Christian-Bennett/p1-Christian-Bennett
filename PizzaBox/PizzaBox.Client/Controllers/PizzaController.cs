@@ -14,17 +14,23 @@ namespace PizzaBox.Client.Controllers
     [HttpGet]
     public IActionResult Create()
     {
-      return View(new PizzaViewModel());
+      string str = this.HttpContext.Request.QueryString.Value.Substring(4, 16);
+      TempData["oid"] = str;
+      return View(new PizzaViewModel(){});
     }
 
     [HttpPost]
-    public IActionResult Create(PizzaViewModel pvm)
+    public ActionResult Create(PizzaViewModel pvm)
     {
-      pvm.SetToppings(pvm);
-      pvm.Post(pvm);
-
       
-      return View("Yay");
+      string str = TempData["oid"] as string;
+      long oid = Convert.ToInt64(str);
+      pvm.SetToppings(pvm);
+      pvm.Post(pvm, oid);
+
+      OrderViewModel ovm = new OrderViewModel("", str);
+      return View("~/Views/Shared/NewOrder.cshtml", ovm);
+      
     }
 
     [HttpPut]

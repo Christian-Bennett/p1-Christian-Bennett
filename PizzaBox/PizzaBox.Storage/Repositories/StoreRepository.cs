@@ -7,33 +7,23 @@ using PizzaBox.Storage.Interfaces;
 
 namespace PizzaBox.Storage.Repositories
 {
-  public class OrderRepository : IRepository
+  public class StoreRepository : IRepository
   {
     private readonly PizzaBoxDbContext _db = new PizzaBoxDbContext();
-  
 
     public IEnumerable<T> Read<T>() where T : class
     {
       return _db.Set<T>();
     }
 
-    public Order GetById(long id)
+    public Store GetByZip(string zip)
     {
-      return _db.Order.Single(o => o.Id == id);
+      return _db.Store.Single(st => st.Zip == zip);
     }
 
-    public bool Post(Order order)
+    public Store SetStore()
     {
-      _db.Order.Add(order);
-      return _db.SaveChanges() == 1;
-    }
-
-    public bool Put(Order Order)
-    {
-      Order o = GetById(Order.Id);
-
-      o = Order;
-      return _db.SaveChanges() == 1;
+      return _db.Store.FirstOrDefault();
     }
 
   }

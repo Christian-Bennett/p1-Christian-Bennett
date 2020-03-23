@@ -34,6 +34,7 @@ namespace PizzaBox.Storage.Databases
       builder.Entity<Pizza>().Property(p => p.Id).ValueGeneratedNever();
       builder.Entity<PizzaToppings>().HasKey(pt => new { pt.PizzaId, pt.ToppingId });
       builder.Entity<Order>().HasKey(o => o.Id);
+      builder.Entity<Order>().Property(o => o.Id).ValueGeneratedNever();
       //User Components
       builder.Entity<User>().HasKey(u => u.Id);
       builder.Entity<Store>().HasKey(st => st.Id);

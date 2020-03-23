@@ -18,7 +18,17 @@ namespace PizzaBox.Storage.Repositories
 
     public List<User> Read(string Name)
     {
-      return _db.User.Where(x => x.Name == Name).ToList();
+      return _db.User.Where(x => x.UserName == Name).ToList();
+    }
+
+    public User GetById(long id)
+    {
+      return _db.User.Single(u => u.Id == id );
+    }
+
+    public User GetByName(string name)
+    {
+      return _db.User.Single(u => u.UserName == name);
     }
 
     public User VerifyAccount(string user, string pass)

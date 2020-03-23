@@ -16,6 +16,11 @@ namespace PizzaBox.Storage.Repositories
       return _db.Set<T>();
     }
 
+    public List<Pizza> GetByOrder(long id)
+    {
+      return _db.Pizza.Where(p => p.OrderId == id).ToList();
+    }
+
     public bool Post(Pizza pizza)
     {
       _db.Pizza.Add(pizza);

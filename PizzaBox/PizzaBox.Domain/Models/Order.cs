@@ -17,13 +17,12 @@ namespace PizzaBox.Domain.Models
 
     #endregion
 
-    public Order()
-    {
-      Id = DateTime.Now.Ticks;
-    }
+    public Order(){ }
     public Order(string username)
     {
-      Id = DateTime.Now.Ticks;
+      Id = Int64.Parse(DateTime.Now.Ticks.ToString().Substring(0,16));
+
+      TimeOfOrder = DateTime.Now;
     }
 
   }

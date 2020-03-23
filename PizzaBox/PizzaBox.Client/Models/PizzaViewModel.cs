@@ -12,6 +12,7 @@ namespace PizzaBox.Client.Models
     private readonly CrustRepository _cr = new CrustRepository();
     private readonly SizeRepository _sr = new SizeRepository();
     private readonly OrderRepository _or = new OrderRepository();
+    private readonly StoreRepository _str = new StoreRepository();
 
     public List<Crust> CrustList { get; set; }
     public List<Size> SizeList { get; set; }
@@ -20,11 +21,15 @@ namespace PizzaBox.Client.Models
     public string Crust { get; set; }
     public string Size { get; set; }
     public List<Topping> SelectedToppings { get; set; }
+    public List<Store> Stores { get; set; }
+    public string Store { get; set; }
+    public string OrderId { get; set; }
     public PizzaViewModel()
     {
       SizeList = _pr.Read<Size>().ToList();
       CrustList = _pr.Read<Crust>().ToList();
       ToppingList = _pr.Read<Topping>().ToList();
+      Stores = _str.Read<Store>().ToList();
     }
 
     public void SetToppings(PizzaViewModel pvm)
@@ -40,13 +45,13 @@ namespace PizzaBox.Client.Models
       pvm.SelectedToppings = x;
     }
 
-    public bool Post(PizzaViewModel pvm)
+    public bool Post(PizzaViewModel pvm, long oid)
     {
 
       Crust crust = _cr.Get(pvm.Crust);
       Size size = _sr.Get(pvm.Size);
 
-      var p = new Pizza(){ CrustId = crust.Id, SizeId = size.Id, OrderId = 8};
+      var p = new Pizza(){ CrustId = crust.Id, SizeId = size.Id, OrderId = oid };
       crust.Pizzas = new List<Pizza> { p };
       size.Pizzas = new List<Pizza> { p };
       List<PizzaToppings> pt = new List<PizzaToppings>();

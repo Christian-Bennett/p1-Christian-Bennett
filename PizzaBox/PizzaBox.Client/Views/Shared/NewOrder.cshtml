@@ -1,0 +1,35 @@
+@model PizzaBox.Client.Models.OrderViewModel
+
+<h1>New Order</h1>
+<h2>Order Id @Model.order.Id</h2>
+<h3>User Name @Model.Username</h3>
+
+<input type="button" title="NewPizza" value="Add Pizza" onclick="location.href='@Url.Action("Create", "Pizza")?id=' + @Model.order.Id" />
+
+@if(@Model.pizzas != null){
+  <ol>
+  @for(int i = 0; i < @Model.pizzas.Count; i++)
+  {
+    @* <p>Pizza # @i+1 @Model.pizzas[i].Size.Name @Model.pizzas[i].Crust.Name</p>
+    <p>@Model.pizzas[i].Size</p>
+    <p>@Model.pizzas[i].Crust</p> *@
+  
+    
+      <li>Pizza #i</li>
+      <ul>
+        <li>@Model.pizzas[i].Size.Name</li>
+        <li>@Model.pizzas[i].Crust.Name</li>
+        @foreach (var item in @Model.pizzas[i].PizzaToppings)
+        {
+          <li>@item.ToppingId</li>
+        }
+      </ul>
+    
+  }
+  </ol>  
+
+  }
+else{
+  <h5>No Pizzas Created :(</h5>
+
+}

@@ -28,6 +28,7 @@ namespace PizzaBox.Client.Controllers
           account = account.GetByName(account);
           ViewData["Username"] = account.Username;
           TempData["Un"] = account.Username;
+          TempData["oid"] = "x";
 
           if(account.user.isStore)
             {
@@ -45,12 +46,13 @@ namespace PizzaBox.Client.Controllers
     {
       return View();
     }
+    
     [HttpPost]
-    public ActionResult NewOrder(AccountViewModel avm)
+    public IActionResult NewOrder()
     {
-      return View(new OrderViewModel(TempData["Un"] as string));
+
+        return View(new OrderViewModel(TempData["Un"] as string, TempData["oid"] as string));
+      
     }
-
-
   }
 }

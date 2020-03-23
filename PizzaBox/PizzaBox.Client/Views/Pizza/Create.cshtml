@@ -4,7 +4,7 @@
   ViewBag.Title = "Create";
 }
 
-<form action="/pizza/create" method="post">
+<form action="/pizza/create" method="post" onsubmit='return View("~/Views/Shared/NewOrder.cshtml")'>
   @Html.AntiForgeryToken()
 
   @foreach (var item in Model.SizeList)

@@ -10,7 +10,7 @@ using PizzaBox.Storage.Databases;
 namespace PizzaBox.Storage.Migrations
 {
     [DbContext(typeof(PizzaBoxDbContext))]
-    [Migration("20200323025006_tenth")]
+    [Migration("20200323193727_tenth")]
     partial class tenth
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,25 +41,25 @@ namespace PizzaBox.Storage.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 637205106064073451L,
+                            Id = 637205710473456085L,
                             Name = "Traditional (Fluffy)",
                             Price = 2.00m
                         },
                         new
                         {
-                            Id = 637205106064073482L,
+                            Id = 637205710473456115L,
                             Name = "Thin Crust",
                             Price = 1.00m
                         },
                         new
                         {
-                            Id = 637205106064073486L,
+                            Id = 637205710473456119L,
                             Name = "New York Style",
                             Price = 1.50m
                         },
                         new
                         {
-                            Id = 637205106064073488L,
+                            Id = 637205710473456122L,
                             Name = "Deep Dish",
                             Price = 4.00m
                         });
@@ -68,9 +68,10 @@ namespace PizzaBox.Storage.Migrations
             modelBuilder.Entity("PizzaBox.Domain.Models.Order", b =>
                 {
                     b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("Confirmed")
+                        .HasColumnType("bit");
 
                     b.Property<long>("StoreId")
                         .HasColumnType("bigint");
@@ -93,6 +94,7 @@ namespace PizzaBox.Storage.Migrations
                         new
                         {
                             Id = 8L,
+                            Confirmed = false,
                             StoreId = 4L,
                             TimeOfOrder = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserId = 1L
@@ -165,25 +167,25 @@ namespace PizzaBox.Storage.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 637205106064047904L,
+                            Id = 637205710473430301L,
                             Name = "X-Large",
                             Price = 4.00m
                         },
                         new
                         {
-                            Id = 637205106064065847L,
+                            Id = 637205710473448024L,
                             Name = "Large",
                             Price = 3.00m
                         },
                         new
                         {
-                            Id = 637205106064065888L,
+                            Id = 637205710473448065L,
                             Name = "Medium",
                             Price = 2.25m
                         },
                         new
                         {
-                            Id = 637205106064065892L,
+                            Id = 637205710473448069L,
                             Name = "Small",
                             Price = 1.50m
                         });
@@ -262,28 +264,28 @@ namespace PizzaBox.Storage.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 637205106064074039L,
+                            Id = 637205710473456660L,
                             Name = "Marinara Sauce",
                             Price = 0.75m,
                             Selected = false
                         },
                         new
                         {
-                            Id = 637205106064074061L,
+                            Id = 637205710473456681L,
                             Name = "Cheese",
                             Price = 1.00m,
                             Selected = false
                         },
                         new
                         {
-                            Id = 637205106064074064L,
+                            Id = 637205710473456685L,
                             Name = "Pepperoni",
                             Price = 1.25m,
                             Selected = false
                         },
                         new
                         {
-                            Id = 637205106064074067L,
+                            Id = 637205710473456688L,
                             Name = "Sausage",
                             Price = 1.50m,
                             Selected = false
