@@ -1,5 +1,13 @@
-<h1>User</h1>
+@model PizzaBox.Client.Models.AccountViewModel
 
-<a href="/user/history">Order History</a>
-<a href="/user/order">Place Order</a>
+<h1>User: @ViewData["Username"]</h1>
+
+<form action="/account/neworder" method="post">
+    <button type="submit" value="Submit">New Order</button>
+</form>
+
+
+
+<a href="/order/history">Order History</a>
+<a href="/account/neworder">New Order</a>
 <a href="/account/logout">logout</a>

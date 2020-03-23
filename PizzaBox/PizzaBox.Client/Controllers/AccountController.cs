@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using PizzaBox.Client.Models;
 using PizzaBox.Domain.Models;
@@ -22,12 +23,19 @@ namespace PizzaBox.Client.Controllers
 
         if(account.CheckAccount(account.Username, account.Password))
         {
-          User user = account.GetUser(account);
-          if(!user.isStore)
+          
+          account.user = account.GetUser(account);
+          account = account.GetByName(account);
+          ViewData["Username"] = account.Username;
+          TempData["Un"] = account.Username;
+
+          if(account.user.isStore)
             {
-              return View("User");
+
+              return View("Store");
             }
-          return View("Store");
+
+          return View("User");
         }
       }
       return View("Login");
@@ -36,6 +44,11 @@ namespace PizzaBox.Client.Controllers
     public IActionResult Logout()
     {
       return View();
+    }
+    [HttpPost]
+    public ActionResult NewOrder(AccountViewModel avm)
+    {
+      return View(new OrderViewModel(TempData["Un"] as string));
     }
 
 

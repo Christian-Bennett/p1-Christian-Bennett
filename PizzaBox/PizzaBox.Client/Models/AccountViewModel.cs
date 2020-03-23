@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using PizzaBox.Domain.Models;
 using PizzaBox.Storage.Repositories;
 
@@ -12,6 +14,9 @@ namespace PizzaBox.Client.Models
     public string Username { get; set; }
     [Required]
     public string Password { get; set; }
+    public List<User> users { get; set; }
+    public User user { get; set; }
+    public long UserId { get; set; }
 
     public bool CheckAccount(string un, string pass)
     {
@@ -23,9 +28,19 @@ namespace PizzaBox.Client.Models
       
     }
 
+    public AccountViewModel GetByName(AccountViewModel avm)
+    {
+      var y = new List<User>();
+      _ur.Read(avm.Username).ForEach(x => y.Add( new User(){UserName = x.UserName, Id = x.Id}));
+      avm.users = y;
+      
+      return avm;
+    }
+
     public User GetUser(AccountViewModel avm)
     {
       return _ur.VerifyAccount(avm.Username, avm.Password);
     }
+
   }
 }

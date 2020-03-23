@@ -6,6 +6,7 @@ namespace PizzaBox.Domain.Models
   {
     public long Id { get; set; }
     public DateTime TimeOfOrder { get; set; }
+    public bool Confirmed { get; set; }
 
     #region NAVIGATIONAL PROPERTIES
 
@@ -18,7 +19,11 @@ namespace PizzaBox.Domain.Models
 
     public Order()
     {
-      //Id = DateTime.Now.Ticks;
+      Id = DateTime.Now.Ticks;
+    }
+    public Order(string username)
+    {
+      Id = DateTime.Now.Ticks;
     }
 
   }

@@ -12,12 +12,6 @@ namespace PizzaBox.Client.Controllers
   {
 
     [HttpGet]
-    public IActionResult Get()
-    {
-      return View();
-    }
-
-    [HttpGet]
     public IActionResult Create()
     {
       return View(new PizzaViewModel());
