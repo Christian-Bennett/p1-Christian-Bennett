@@ -7,7 +7,7 @@ using PizzaBox.Storage.Interfaces;
 
 namespace PizzaBox.Storage.Repositories
 {
-  public class PizzaBoxRepository : IRepository
+  public class SizeRepository : IRepository
   {
     private readonly PizzaBoxDbContext _db = new PizzaBoxDbContext();
 
@@ -16,10 +16,15 @@ namespace PizzaBox.Storage.Repositories
       return _db.Set<T>();
     }
 
-    public bool Post(Pizza pizza)
+    public bool Post(Size size)
     {
-      _db.Pizza.Add(pizza);
+      _db.Size.Add(size);
       return _db.SaveChanges() == 1;
+    }
+
+    public Size Get(string sizeName)
+    {
+      return _db.Size.SingleOrDefault(s => s.Name == sizeName);
     }
     
 

@@ -4,6 +4,6 @@ namespace PizzaBox.Storage.Interfaces
 {
   public interface IRepository
   {
-    IEnumerable<T> Read<T>();
+    IEnumerable<T> Read<T>() where T : class;
   }
 }

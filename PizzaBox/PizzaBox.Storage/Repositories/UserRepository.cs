@@ -7,7 +7,7 @@ using PizzaBox.Storage.Interfaces;
 
 namespace PizzaBox.Storage.Repositories
 {
-  public class PizzaBoxRepository : IRepository
+  public class UserRepository : IRepository
   {
     private readonly PizzaBoxDbContext _db = new PizzaBoxDbContext();
 
@@ -16,12 +16,16 @@ namespace PizzaBox.Storage.Repositories
       return _db.Set<T>();
     }
 
-    public bool Post(Pizza pizza)
+    public User VerifyAccount(string user, string pass)
     {
-      _db.Pizza.Add(pizza);
-      return _db.SaveChanges() == 1;
+      if(_db.User.Single(u => u.UserName == user) != null)
+      {
+        if(_db.User.Single(u => u.UserName == user).Password == pass)
+        {
+          return _db.User.Single(u => u.UserName == user);
+        }
+      }
+      return null;
     }
-    
-
   }
 }

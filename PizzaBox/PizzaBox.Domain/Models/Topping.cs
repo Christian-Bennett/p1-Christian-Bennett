@@ -7,6 +7,7 @@ namespace PizzaBox.Domain.Models
   public class Topping : APizzaComponent
   {
     public List<PizzaToppings> PizzaToppings { get; set; }
+    public bool Selected { get; set; }
 
     public Topping()
     {

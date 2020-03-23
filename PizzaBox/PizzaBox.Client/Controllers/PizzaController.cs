@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using PizzaBox.Client.Models;
+using PizzaBox.Domain.Models;
 using PizzaBox.Storage.Databases;
 using PizzaBox.Storage.Repositories;
+using System;
 using System.Collections.Generic;
 
 namespace PizzaBox.Client.Controllers
@@ -22,14 +24,13 @@ namespace PizzaBox.Client.Controllers
     }
 
     [HttpPost]
-    public IActionResult Create(PizzaViewModel pizzaViewModel)
+    public IActionResult Create(PizzaViewModel pvm)
     {
+      pvm.SetToppings(pvm);
+      pvm.Post(pvm);
 
-      if(ModelState.IsValid)
-      {
-        return RedirectToAction("User");
-      }
-      return View();
+      
+      return View("Yay");
     }
 
     [HttpPut]

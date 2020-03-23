@@ -1,14 +1,16 @@
+using System.Collections.Generic;
+using PizzaBox.Domain.Models;
+
 namespace PizzaBox.Domain.Abstracts
 {
-  public abstract class AUserComponent
+  public abstract class AInfoComponent
   {
-    public string Id { get; set; }
-    public string Username { get; set; }
-    public string Password { get; set; }
+    public long Id { get; set; }
     public string StreetAddress { get; set; }
     public string City { get; set; }
     public string State { get; set; }
     public string Zip { get; set; }
+    public List<Order> Orders { get; set; }
 
   }
 }
