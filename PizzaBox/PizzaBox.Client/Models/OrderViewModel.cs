@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -23,37 +24,36 @@ namespace PizzaBox.Client.Models
 
     public OrderViewModel(string username, string oid)
     {
-      if(oid.Length != 16){
+      
+      if(!long.TryParse(oid, out long num)){
         
         order = new Order(username){};
         Username = username;
         order.UserId = _ur.GetByName(username).Id;
+        StoreName = oid;
         UserId = order.UserId;
+        order.StoreId = _str.GetByName(oid).Id;
 
         Post(order);
       }
       else{
-        order = new Order(){ Id = long.Parse(oid) };
+        
+        order = new Order(){ Id = num };
         order.UserId = _or.GetById(order.Id).UserId;
-        Username = _ur.GetById(order.UserId).UserName;        
+        Username = _ur.GetById(order.UserId).UserName;  
+        StoreName = _str.GetById(order.StoreId).StreetAddress;     
         pizzas = _pr.GetByOrder(order.Id);
 
-
-        
+               
       }
       
-      
-
-      
-
-      
-
     }
+    public OrderViewModel(){}
 
     public bool Post(Order order)
     {
       
-      Store store  = _str.SetStore();
+      Store store  = _str.GetById(order.StoreId);
       User user = _ur.GetById(order.UserId);
       
       var o = new Order(){Id = order.Id, UserId = user.Id, StoreId = store.Id};

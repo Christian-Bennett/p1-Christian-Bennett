@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using PizzaBox.Domain.Models;
 using PizzaBox.Storage.Databases;
 using PizzaBox.Storage.Interfaces;
@@ -18,7 +19,7 @@ namespace PizzaBox.Storage.Repositories
 
     public List<Pizza> GetByOrder(long id)
     {
-      return _db.Pizza.Where(p => p.OrderId == id).ToList();
+      return _db.Pizza.Where(p => p.OrderId == id).Include(c => c.Crust).Include(s => s.Size).Include(pt => pt.PizzaToppings).ToList();
     }
 
     public bool Post(Pizza pizza)

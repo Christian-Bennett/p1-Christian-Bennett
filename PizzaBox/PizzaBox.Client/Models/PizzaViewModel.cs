@@ -29,7 +29,6 @@ namespace PizzaBox.Client.Models
       SizeList = _pr.Read<Size>().ToList();
       CrustList = _pr.Read<Crust>().ToList();
       ToppingList = _pr.Read<Topping>().ToList();
-      Stores = _str.Read<Store>().ToList();
     }
 
     public void SetToppings(PizzaViewModel pvm)
@@ -56,7 +55,7 @@ namespace PizzaBox.Client.Models
       size.Pizzas = new List<Pizza> { p };
       List<PizzaToppings> pt = new List<PizzaToppings>();
       pvm.SelectedToppings.ForEach(x => pt.Add(new PizzaToppings(){ PizzaId = p.Id, ToppingId = x.Id}));
-      
+      p.Price = crust.Price + size.Price + SelectedToppings.Sum(x => x.Price);
       p.PizzaToppings = pt;
 
       return _pr.Post(p);

@@ -24,7 +24,7 @@ namespace PizzaBox.Storage.Repositories
 
     public Size Get(string sizeName)
     {
-      return _db.Size.SingleOrDefault(s => s.Name == sizeName);
+      return _db.Size.Single(s => s.Name == sizeName);
     }
     
 

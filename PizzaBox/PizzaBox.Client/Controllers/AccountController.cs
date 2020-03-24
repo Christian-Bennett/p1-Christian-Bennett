@@ -32,11 +32,10 @@ namespace PizzaBox.Client.Controllers
 
           if(account.user.isStore)
             {
-
               return View("Store");
             }
 
-          return View("User");
+          return View("User", account);
         }
       }
       return View("Login");
@@ -50,9 +49,12 @@ namespace PizzaBox.Client.Controllers
     [HttpPost]
     public IActionResult NewOrder()
     {
-
-        return View(new OrderViewModel(TempData["Un"] as string, TempData["oid"] as string));
-      
+      var x = Request.Form["Stores"];
+      if("x" == TempData["oid"] as string)
+      {
+        return View(new OrderViewModel(TempData["Un"] as string, x[0]));
+      }
+      return View(new OrderViewModel(TempData["Un"] as string, TempData["oid"] as string));
     }
   }
 }
