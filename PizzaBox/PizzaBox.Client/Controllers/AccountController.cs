@@ -18,6 +18,7 @@ namespace PizzaBox.Client.Controllers
     [HttpPost]
     public IActionResult Login(AccountViewModel account)
     {
+      
       if(ModelState.IsValid)
       {
 
@@ -32,7 +33,7 @@ namespace PizzaBox.Client.Controllers
 
           if(account.user.isStore)
             {
-              return View("Store");
+              return View("Store", account);
             }
 
           return View("User", account);
@@ -67,6 +68,13 @@ namespace PizzaBox.Client.Controllers
       ovm.Update(ovm);
 
       return View("~/Views/Shared/Confirm.cshtml", ovm);
+    }
+
+    public IActionResult History()
+    {
+      
+      OrderViewModel ovm = new OrderViewModel();
+      return View("~/Views/Shared/history .cshtml", ovm);
     }
   }
 }

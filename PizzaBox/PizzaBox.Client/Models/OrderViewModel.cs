@@ -49,6 +49,11 @@ namespace PizzaBox.Client.Models
       
     }
     public OrderViewModel(){}
+    public OrderViewModel(int uid)
+    {
+      
+      pizzas = _pr.GetByOrder(order.Id);
+    }
 
     public bool Post(Order order)
     {

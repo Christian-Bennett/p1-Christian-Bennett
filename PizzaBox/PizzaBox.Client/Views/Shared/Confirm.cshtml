@@ -4,7 +4,5 @@
 
 @Model.order.Total
 
-<form action="/shared/user" method="post">
-  <button type="submit" value="Submit">Return to Userpage</button>
-</form>
+<input type="button" value="Return to User Screen" onclick="location.href='@Url.Action("login", "account")?id=' + @Model.order.UserId" />
 <a href="/account/logout">logout</a>

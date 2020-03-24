@@ -1,4 +1,4 @@
 <h1>Store</h1>
 
-<a href="/store/history">order history</a>
+<input type="button" value="Return to User Screen" onclick="location.href='@Url.Action("history", "account")?id=' + @Model.order.UserId" />
 <a href="/account/logout">logout</a>
