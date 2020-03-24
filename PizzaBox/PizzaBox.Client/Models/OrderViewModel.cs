@@ -39,7 +39,7 @@ namespace PizzaBox.Client.Models
       else{
         
         order = new Order(){ Id = num };
-        order.UserId = _or.GetById(order.Id).UserId;
+        order = _or.GetById(order.Id);
         Username = _ur.GetById(order.UserId).UserName;  
         StoreName = _str.GetById(order.StoreId).StreetAddress;     
         pizzas = _pr.GetByOrder(order.Id);
@@ -63,6 +63,16 @@ namespace PizzaBox.Client.Models
 
       return _or.Post(o);
     }
+
+    public bool Update(OrderViewModel ovm)
+    {
+      ovm.order.Confirmed = true;
+      ovm.order.TimeOfOrder = DateTime.Now;
+      ovm.order.Total = ovm.pizzas.Sum(p => p.Price);
+      return _or.Put(ovm.order);
+    }
+
+
     
   }
 }

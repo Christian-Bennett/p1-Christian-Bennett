@@ -90,11 +90,6 @@ namespace PizzaBox.Storage.Databases
         new User() { Id = 2, UserName = "Person2", Password = "Password123456",  Name = "Foo Bar", StreetAddress = "2602 Mayfield Rd", City = "Grand Prairie", State = "TX", Zip = "75052", isStore = false},
         new User() { Id = 3, UserName = "Store1", Password = "Password1234567", Name = "Arlington Store", StreetAddress = "1 AT&T Way", City = "Arlington", State = "TX", Zip = "76011", isStore = true},
       });
-
-      builder.Entity<Order>().HasData(new Order[]
-      {
-        new Order() { Id = 8, UserId = 1, StoreId = 4 }
-      });
     }
   }
 }

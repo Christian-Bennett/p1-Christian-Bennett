@@ -56,5 +56,17 @@ namespace PizzaBox.Client.Controllers
       }
       return View(new OrderViewModel(TempData["Un"] as string, TempData["oid"] as string));
     }
+
+    [HttpGet]
+    public IActionResult Confirm()
+    {
+      var x = this.HttpContext.Request.QueryString.Value.Substring(4, 16);
+
+      OrderViewModel ovm = new OrderViewModel("", x);
+
+      ovm.Update(ovm);
+
+      return View("~/Views/Shared/Confirm.cshtml");
+    }
   }
 }

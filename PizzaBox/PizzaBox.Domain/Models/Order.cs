@@ -7,6 +7,7 @@ namespace PizzaBox.Domain.Models
     public long Id { get; set; }
     public DateTime TimeOfOrder { get; set; }
     public bool Confirmed { get; set; }
+    public decimal Total { get; set; }
 
     #region NAVIGATIONAL PROPERTIES
 
@@ -21,8 +22,6 @@ namespace PizzaBox.Domain.Models
     public Order(string username)
     {
       Id = Int64.Parse(DateTime.Now.Ticks.ToString().Substring(0,16));
-
-      TimeOfOrder = DateTime.Now;
     }
 
   }

@@ -10,6 +10,8 @@
 
 <input type="button" title="NewPizza" value="Add Pizza" onclick="location.href='@Url.Action("Create", "Pizza")?id=' + @Model.order.Id" />
 
+  @Html.AntiForgeryToken()
+
 @if(@Model.pizzas != null){
   <ol>
   @{var n = 1;}
@@ -22,6 +24,7 @@
     
       <li>Pizza #@n</li>
       <ul>
+        <ul>@String.Concat("$", @Model.pizzas[i].Price)</ul>
         <ul>@Model.pizzas[i].Size.Name</ul>
         <ul>@Model.pizzas[i].Crust.Name</ul>
         @foreach (var item in @Model.pizzas[i].PizzaToppings)
@@ -37,3 +40,5 @@ else{
   <h5>No Pizzas Created :(</h5>
 
 }
+
+<input type="button" value="Confirm Order" onclick="location.href='@Url.Action("Confirm", "account")?id=' + @Model.order.Id" />

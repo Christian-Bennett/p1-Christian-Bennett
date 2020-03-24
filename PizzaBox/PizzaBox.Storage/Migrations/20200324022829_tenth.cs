@@ -93,6 +93,7 @@ namespace PizzaBox.Storage.Migrations
                     Id = table.Column<long>(nullable: false),
                     TimeOfOrder = table.Column<DateTime>(nullable: false),
                     Confirmed = table.Column<bool>(nullable: false),
+                    Total = table.Column<decimal>(nullable: false),
                     StoreId = table.Column<long>(nullable: false),
                     UserId = table.Column<long>(nullable: false)
                 },
@@ -176,10 +177,10 @@ namespace PizzaBox.Storage.Migrations
                 columns: new[] { "Id", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 637205710473456085L, "Traditional (Fluffy)", 2.00m },
-                    { 637205710473456115L, "Thin Crust", 1.00m },
-                    { 637205710473456119L, "New York Style", 1.50m },
-                    { 637205710473456122L, "Deep Dish", 4.00m }
+                    { 637205957095794575L, "Traditional (Fluffy)", 2.00m },
+                    { 637205957095794605L, "Thin Crust", 1.00m },
+                    { 637205957095794609L, "New York Style", 1.50m },
+                    { 637205957095794612L, "Deep Dish", 4.00m }
                 });
 
             migrationBuilder.InsertData(
@@ -187,10 +188,10 @@ namespace PizzaBox.Storage.Migrations
                 columns: new[] { "Id", "Name", "Price" },
                 values: new object[,]
                 {
-                    { 637205710473430301L, "X-Large", 4.00m },
-                    { 637205710473448024L, "Large", 3.00m },
-                    { 637205710473448065L, "Medium", 2.25m },
-                    { 637205710473448069L, "Small", 1.50m }
+                    { 637205957095769885L, "X-Large", 4.00m },
+                    { 637205957095787147L, "Large", 3.00m },
+                    { 637205957095787187L, "Medium", 2.25m },
+                    { 637205957095787191L, "Small", 1.50m }
                 });
 
             migrationBuilder.InsertData(
@@ -208,10 +209,10 @@ namespace PizzaBox.Storage.Migrations
                 columns: new[] { "Id", "Name", "Price", "Selected" },
                 values: new object[,]
                 {
-                    { 637205710473456660L, "Marinara Sauce", 0.75m, false },
-                    { 637205710473456681L, "Cheese", 1.00m, false },
-                    { 637205710473456685L, "Pepperoni", 1.25m, false },
-                    { 637205710473456688L, "Sausage", 1.50m, false }
+                    { 637205957095795151L, "Marinara Sauce", 0.75m, false },
+                    { 637205957095795174L, "Cheese", 1.00m, false },
+                    { 637205957095795177L, "Pepperoni", 1.25m, false },
+                    { 637205957095795180L, "Sausage", 1.50m, false }
                 });
 
             migrationBuilder.InsertData(
@@ -223,11 +224,6 @@ namespace PizzaBox.Storage.Migrations
                     { 1L, "Mansfield", "Strong Bad", "Password12345", "TX", "2700 E Broad St", "Person1", "76063", false },
                     { 3L, "Arlington", "Arlington Store", "Password1234567", "TX", "1 AT&T Way", "Store1", "76011", true }
                 });
-
-            migrationBuilder.InsertData(
-                table: "Order",
-                columns: new[] { "Id", "Confirmed", "StoreId", "TimeOfOrder", "UserId" },
-                values: new object[] { 8L, false, 4L, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1L });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Order_StoreId",
