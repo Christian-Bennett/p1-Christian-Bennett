@@ -1,4 +1,8 @@
-@model PizzaBox.Client.Models.AccountViewModel
+@model PizzaBox.Client.Models.OrderViewModel
+
+<h1>Order Confirmed!</h1>
+
+@Model.order.Total
 
 <form action="/account/login" method="post">
 <button type="submit" value="Submit">Return to Userpage</button>
