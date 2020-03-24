@@ -66,7 +66,7 @@ namespace PizzaBox.Client.Controllers
 
       ovm.Update(ovm);
 
-      return View("~/Views/Shared/Confirm.cshtml");
+      return View("~/Views/Shared/Confirm.cshtml", ovm);
     }
   }
 }
