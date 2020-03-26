@@ -4,9 +4,9 @@ pr:
   - master
 
 stages:
-  - stage: pack
+  - stage:
     jobs:
-      - job: 
+      - job:
         pool:
           vmImage: ubuntu-18.04
         steps:
@@ -21,6 +21,24 @@ stages:
         steps:
           - script: dotnet test --collect:"XPlat Code Coverage"
           workingDirectory: $(working_dir)
+  
+  - stage: analyze
+    jobs:
+      - job:
+        pool:
+          vmImage: ubuntu-18.04
+        steps:
+          - task: DotnetGlobalToolInstaller@0
+            inputs:
+              name: "dotnet-sonarscanner"
+          - script: |
+              dotnet sonarscanner begin /k:"2002-24-dotnet_p1-Christian-Bennett" /o:"2002-24-dotnet" /d:sonar.login="$SONAR_LOGIN" /d:sonar.host.url=https://sonarcloud.io
+              dotnet build
+              dotnet test --collect:"XPlat Code Coverage"
+              dotnet sonarscanner end /d:sonar.login="SONAR_LOGIN"
+            workingDirectory: $(working_dir)
+            env:
+              SONAR_LOGIN: $(sonar_login)
 
   - stage: pack
     jobs:
@@ -28,17 +46,42 @@ stages:
         pool:
           vmImage: ubuntu18.04
         steps:
+          - task: Docker@2
+            inputs:
+              containerRegistry: "docker"
+              command: "login"
           - script: |
-          docker login
           docker image build --file dockerfile --tag bennetcd/p1 .
           docker image push bennetcd/p1
-          docker logout
-        workingDirectory: ./PizzaBox
-        
+        workingDirectory: $(working_dir)
+        env:
+          DOCKER_IMAGE: $(image_name)
+          - task:
+            inputs:
+              containerRegistry: "docker"
+              command: "logout"
+
+  - stage: deploy
+    jobs:
+      jobs:
+        - job:
+          pool:
+            vmImage: ubuntu-18.04
+          steps:
+            - task: AzureRmWebAppDeployment@4
+              inputs:
+                ConnectionType: "AzureRM"
+                azureSubscription: ""
+                appType: "webAppContainer"
+                WebAppName: "PizzaBox"
+                DockerNamespace: "bennetcd"
+                DockerRepository: "p1"      
 
 trigger:
   - master
 
 variables:
+  - name: image_name
+    value: bennetcd/p1
   - name: working_dir
     value: $(System.DefaultWorkingDirectory)/PizzaBox
