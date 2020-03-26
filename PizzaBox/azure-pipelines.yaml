@@ -51,19 +51,18 @@ stages:
               containerRegistry: "docker"
               command: "login"
           - script: |
-              docker image build --file dockerfile --tag bennetcd/p1 .
+              docker image build -f dockerfile -t bennetcd/p1 .
               docker image push bennetcd/p1
             workingDirectory: $(working_dir)
             env:
               DOCKER_IMAGE: $(image_name)
-          - task:
+          - task: Docker@2
             inputs:
               containerRegistry: "docker"
               command: "logout"
 
   - stage: deploy
     jobs:
-      jobs:
         - job:
           pool:
             vmImage: ubuntu-18.04
