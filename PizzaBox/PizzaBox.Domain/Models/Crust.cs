@@ -11,6 +11,7 @@ namespace PizzaBox.Domain.Models
     public Crust()
     {
       Id = DateTime.Now.Ticks;
+
     }
   }
 }
