@@ -69,7 +69,7 @@ stages:
         steps:
           - task: AzureRmWebAppDeployment@4
             inputs:
-              ConnectionType: "GitHub"
+              ConnectionType: "AzureRM "
               azureSubscription: "Christian-Bennett" #(a4086594-e733-4902-b070-4e28fa022181)
               appType: "webAppContainer"
               WebAppName: "PizzaBox"
