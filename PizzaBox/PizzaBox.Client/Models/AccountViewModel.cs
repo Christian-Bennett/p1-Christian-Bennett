@@ -52,6 +52,5 @@ namespace PizzaBox.Client.Models
     {
       return _str.Read<Store>().ToList();
     }
-
   }
 }

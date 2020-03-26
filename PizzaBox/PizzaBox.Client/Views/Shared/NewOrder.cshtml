@@ -14,9 +14,11 @@
 
 @if(@Model.pizzas != null){
   <ol>
-  @{var n = 1;}
+  @{int n = 1;}
   @for(int i = 0; i < @Model.pizzas.Count; i++)
   {
+
+    n = i + 1;
     @* <p>Pizza # @i+1 @Model.pizzas[i].Size.Name @Model.pizzas[i].Crust.Name</p>
     <p>@Model.pizzas[i].Size</p>
     <p>@Model.pizzas[i].Crust</p> *@
@@ -34,6 +36,7 @@
       </ul>
   }
   </ol> 
+
   }
    
 else{

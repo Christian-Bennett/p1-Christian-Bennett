@@ -34,7 +34,9 @@ namespace PizzaBox.Client.Models
         UserId = order.UserId;
         order.StoreId = _str.GetByName(oid).Id;
 
+        if(!_ur.GetById(order.UserId).isStore){
         Post(order);
+        }
       }
       else{
         
@@ -49,9 +51,9 @@ namespace PizzaBox.Client.Models
       
     }
     public OrderViewModel(){}
-    public OrderViewModel(int uid)
+    public OrderViewModel(long uid)
     {
-      
+      order = _or.GetByUserId(uid);
       pizzas = _pr.GetByOrder(order.Id);
     }
 

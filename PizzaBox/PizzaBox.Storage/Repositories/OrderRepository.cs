@@ -22,6 +22,12 @@ namespace PizzaBox.Storage.Repositories
       return _db.Order.Single(o => o.Id == id);
     }
 
+    public Order GetByUserId(long id)
+    {
+      return _db.Order.First(o => o.UserId == id);
+    }
+
+
     public bool Post(Order order)
     {
       _db.Order.Add(order);

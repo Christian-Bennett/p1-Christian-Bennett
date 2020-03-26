@@ -36,7 +36,7 @@ namespace PizzaBox.Client.Controllers
               return View("Store", account);
             }
 
-          return View("User", account);
+          return View(account);
         }
       }
       return View("Login");
@@ -70,11 +70,13 @@ namespace PizzaBox.Client.Controllers
       return View("~/Views/Shared/Confirm.cshtml", ovm);
     }
 
+    [HttpGet]
     public IActionResult History()
     {
+      long x = 1;
+      OrderViewModel ovm = new OrderViewModel(x);
       
-      OrderViewModel ovm = new OrderViewModel();
-      return View("~/Views/Shared/history .cshtml", ovm);
+      return View("~/Views/Shared/history.cshtml", ovm);
     }
   }
 }

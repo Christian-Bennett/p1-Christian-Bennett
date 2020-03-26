@@ -12,5 +12,5 @@
     <button type="submit" value="Submit" >New Order</button>
 </form>
 
-<a href="/order/history">Order History</a>
+<input type="button" value="Order History" onclick="location.href='@Url.Action("history", "account")?id=' + @Model.UserId" />
 <a href="/account/logout">logout</a>
