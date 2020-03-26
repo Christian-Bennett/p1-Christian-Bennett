@@ -11,7 +11,7 @@ stages:
           vmImage: ubuntu-18.04
         steps:
           - script: dotnet build
-          workingDirectory: $(working_dir)
+            workingDirectory: $(working_dir)
 
   - stage: test
     jobs:
@@ -20,7 +20,7 @@ stages:
           vmImage: ubuntu-18.04
         steps:
           - script: dotnet test --collect:"XPlat Code Coverage"
-          workingDirectory: $(working_dir)
+            workingDirectory: $(working_dir)
   
   - stage: analyze
     jobs:
@@ -51,11 +51,11 @@ stages:
               containerRegistry: "docker"
               command: "login"
           - script: |
-          docker image build --file dockerfile --tag bennetcd/p1 .
-          docker image push bennetcd/p1
-        workingDirectory: $(working_dir)
-        env:
-          DOCKER_IMAGE: $(image_name)
+              docker image build --file dockerfile --tag bennetcd/p1 .
+              docker image push bennetcd/p1
+            workingDirectory: $(working_dir)
+            env:
+              DOCKER_IMAGE: $(image_name)
           - task:
             inputs:
               containerRegistry: "docker"
