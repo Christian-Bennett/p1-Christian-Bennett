@@ -1,10 +1,10 @@
-name: $(date:yyyyMMdd)$(rev:.rr) #20200319.00
+name: $(date:yyyyMMdd)$(rev:.rr)
 
 pr:
   - master
 
 stages:
-  - stage:
+  - stage: build
     jobs:
       - job:
         pool:
@@ -21,7 +21,7 @@ stages:
         steps:
           - script: dotnet test --collect:"XPlat Code Coverage"
             workingDirectory: $(working_dir)
-  
+
   - stage: analyze
     jobs:
       - job:
@@ -35,7 +35,7 @@ stages:
               dotnet sonarscanner begin /k:"Christian-Bennett_p1-Christian-Bennett" /o:"Christian-Bennett" /d:sonar.login="$SONAR_LOGIN" /d:sonar.host.url=https://sonarcloud.io
               dotnet build
               dotnet test --collect:"XPlat Code Coverage"
-              dotnet sonarscanner end /d:sonar.login="SONAR_LOGIN"
+              dotnet sonarscanner end /d:sonar.login="$SONAR_LOGIN"
             workingDirectory: $(working_dir)
             env:
               SONAR_LOGIN: $(sonar_login)
@@ -44,15 +44,15 @@ stages:
     jobs:
       - job:
         pool:
-          vmImage: ubuntu18.04
+          vmImage: ubuntu-18.04
         steps:
           - task: Docker@2
             inputs:
               containerRegistry: "docker"
               command: "login"
           - script: |
-              docker image build -f dockerfile -t bennetcd/p1 .
-              docker image push bennetcd/p1
+              docker image build -f dockerfile -t $DOCKER_IMAGE .
+              docker image push $DOCKER_IMAGE
             workingDirectory: $(working_dir)
             env:
               DOCKER_IMAGE: $(image_name)
@@ -63,18 +63,18 @@ stages:
 
   - stage: deploy
     jobs:
-        - job:
-          pool:
-            vmImage: ubuntu-18.04
-          steps:
-            - task: AzureRmWebAppDeployment@4
-              inputs:
-                ConnectionType: "AzureRM"
-                azureSubscription: "Azure subscription 1(a4086594-e733-4902-b070-4e28fa022181)"
-                appType: "webAppContainer"
-                WebAppName: "PizzaBox"
-                DockerNamespace: "bennetcd"
-                DockerRepository: "p1"      
+      - job:
+        pool:
+          vmImage: ubuntu-18.04
+        steps:
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: "AzureRM"
+              azureSubscription: "Azure subscription 1(a4086594-e733-4902-b070-4e28fa022181)"
+              appType: "webAppContainer"
+              WebAppName: "PizzaBox"
+              DockerNamespace: "bennetcd"
+              DockerRepository: "p1"
 
 trigger:
   - master
