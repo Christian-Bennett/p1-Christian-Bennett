@@ -22,6 +22,7 @@ stages:
           - script: dotnet test --collect:"XPlat Code Coverage"
             workingDirectory: $(working_dir)
 
+
   # - stage: analyze
   #   jobs:
   #     - job:
