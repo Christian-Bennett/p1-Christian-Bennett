@@ -84,4 +84,4 @@ variables:
   - name: image_name
     value: bennetcd/p1
   - name: working_dir
-    value: $(System.DefaultWorkingDirectory)/PizzaBox
+    value: $(System.DefaultWorkingDirectory)
