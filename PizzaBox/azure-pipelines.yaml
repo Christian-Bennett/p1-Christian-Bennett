@@ -47,20 +47,20 @@ stages:
         pool:
           vmImage: ubuntu-18.04
         steps:
-          # - task: Docker@2
-          #   inputs:
-          #     containerRegistry: "docker"
-          #     command: "login"
+          - task: Docker@2
+            inputs:
+              containerRegistry: "docker"
+              command: "login"
           - script: |
               docker image build -f dockerfile -t $DOCKER_IMAGE .
               docker image push $DOCKER_IMAGE
             workingDirectory: $(working_dir)
             env:
               DOCKER_IMAGE: $(image_name)
-          # - task: Docker@2
-          #   inputs:
-          #     containerRegistry: "docker"
-          #     command: "logout"
+          - task: Docker@2
+            inputs:
+              containerRegistry: "docker"
+              command: "logout"
 
   - stage: deploy
     jobs:
