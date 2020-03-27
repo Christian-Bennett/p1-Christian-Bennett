@@ -73,7 +73,7 @@ stages:
               ConnectionType: "AzureRM"
               azureSubscription: "CBp1"
               appType: "webAppContainer"
-              WebAppName: "PizzaBox"
+              WebAppName: "Docker-Rev"
               DockerNamespace: "bennetcd"
               DockerRepository: "p1"
 
@@ -84,4 +84,4 @@ variables:
   - name: image_name
     value: bennetcd/p1
   - name: working_dir
-    value: $(System.DefaultWorkingDirectory)
+    value: $(System.DefaultWorkingDirectory)/PizzaBox
