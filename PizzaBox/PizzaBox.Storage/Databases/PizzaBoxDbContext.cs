@@ -20,7 +20,7 @@ namespace PizzaBox.Storage.Databases
 
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
-      builder.UseSqlServer("server=localhost;database=pizzaboxdb;user id=sa;password=Password12345;");
+      builder.UseSqlServer("Server=tcp:rubuntusql.database.windows.net,1433;Initial Catalog=sqldb;Persist Security Info=False;User ID=radmin;Password=Revature8080!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
     }
     
     protected override void OnModelCreating(ModelBuilder builder)
